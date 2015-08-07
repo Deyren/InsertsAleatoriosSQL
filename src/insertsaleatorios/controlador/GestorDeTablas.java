@@ -7,8 +7,6 @@ import insertsaleatorios.vista.PanelDeTablas;
 import insertsaleatorios.vista.VentanaTabla;
 import insertsaleatorios.vista.componentes.PanelBasico;
 import java.util.ArrayList;
-import javax.swing.SpringLayout;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  * Esta clase es para gestional el panel de tablas.<br>
@@ -89,11 +87,13 @@ public class GestorDeTablas {
     }
      
      private void actualizarVista(){
-         for (Tabla tab:tablasYVistas.getClave()) {
-              VentanaTabla vt = new VentanaTabla(tab);//Se le pasa la tabla a la panel.
-              vt.setVisible(true);
-              this.panel.getPanelDeFondo().add(vt);
-         }
+         tablasYVistas.getClave().stream().map((tab) -> new VentanaTabla(tab)).map((vt) -> {
+             //Se le pasa la tabla a la panel.
+             vt.setVisible(true);
+            return vt;
+        }).forEach((vt) -> {
+            this.panel.getPanelDeFondo().add(vt);
+        });
         
          PanelBasico.actualizarPanel(panel);
          panel.getPanelDeFondo().updateUI();    

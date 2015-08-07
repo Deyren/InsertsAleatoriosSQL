@@ -1,7 +1,7 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.gestiondearchivos;
+package insertsaleatorios.gestiondearchivos;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;

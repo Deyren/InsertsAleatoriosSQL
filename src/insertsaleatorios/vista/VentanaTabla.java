@@ -5,7 +5,6 @@
  */
 package insertsaleatorios.vista;
 
-import insertsaleatorios.controlador.GestorVentanaPrincipal;
 import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
 import java.awt.GridLayout;

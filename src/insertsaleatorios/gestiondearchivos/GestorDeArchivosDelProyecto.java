@@ -10,7 +10,6 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -163,7 +162,7 @@ public class GestorDeArchivosDelProyecto {
             xapa = SAXParserFactory.newInstance();
             ppp = xapa.newSAXParser();
             ppp.parse(archivoXML, saxCallbacks);
-        } catch (ParserConfigurationException | SAXException  ex) {
+        } catch (ParserConfigurationException | SAXException | IOException  ex) {
             Logger.getLogger(GestorDeArchivosDelProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
         

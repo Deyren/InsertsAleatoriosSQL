@@ -1,4 +1,4 @@
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
 import java.awt.Color;
 import java.awt.Cursor;

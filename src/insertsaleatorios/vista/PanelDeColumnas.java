@@ -5,11 +5,8 @@ import insertsaleatorios.controlador.GestorVentanaPrincipal;
 import insertsaleatorios.modelo.Tabla;
 import insertsaleatorios.vista.componentes.PanelBasico;
 import insertsaleatorios.vista.componentes.BarraDeHerramientasPanelDeColumnas;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *Es el panel de fondo donde se añadirán las columnas . <br>
@@ -71,7 +68,6 @@ public class PanelDeColumnas extends PanelBasico {
      */
     private PanelDeColumnas(Tabla tablaParaEstePanel) {
         super();
-        super.barraDeHerramientasDelPanel =  BarraDeHerramientasPanelDeColumnas.getInstance("Barra", this);
         this.suTabla = tablaParaEstePanel;
         jsp = new JScrollPane(panelDeFondo); 
         jsp.getVerticalScrollBar().setUnitIncrement(10);
