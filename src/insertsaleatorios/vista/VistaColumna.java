@@ -84,12 +84,12 @@ public class VistaColumna extends javax.swing.JPanel {
         textoNull.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         textoNull.setText("Null:");
 
-        visePrimaryKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/creadordeinsertssql/vista/vise.png"))); // NOI18N
+        visePrimaryKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/insertsaleatorios/vista/vise.png"))); // NOI18N
         visePrimaryKey.setToolTipText("");
 
-        viseForeignKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/creadordeinsertssql/vista/vise.png"))); // NOI18N
+        viseForeignKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/insertsaleatorios/vista/vise.png"))); // NOI18N
 
-        viseNull.setIcon(new javax.swing.ImageIcon(getClass().getResource("/creadordeinsertssql/vista/vise.png"))); // NOI18N
+        viseNull.setIcon(new javax.swing.ImageIcon(getClass().getResource("/insertsaleatorios/vista/vise.png"))); // NOI18N
         viseNull.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

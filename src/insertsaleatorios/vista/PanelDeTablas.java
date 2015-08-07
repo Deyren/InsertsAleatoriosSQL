@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
- *
- * @author pedruben
+ *Panel de fondo que contiene las vistas de las tablas. 
+ * @author Ruben
  */
 public class PanelDeTablas extends PanelBasico {
 

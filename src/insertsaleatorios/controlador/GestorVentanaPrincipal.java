@@ -62,6 +62,7 @@ public class GestorVentanaPrincipal {
         } 
        // PanelBasico.actualizarPanel(panel);     
         //Borra todo lo que contenga el panel principal
+        panel.setVisible(true);
         ventanaPrincipal.getPanelFondo().removeAll();
         ventanaPrincipal.getPanelFondo().add(panel);    
        ventanaPrincipal.add(panel.getBarraDeHerramientasDelPanel(),BorderLayout.NORTH);  
