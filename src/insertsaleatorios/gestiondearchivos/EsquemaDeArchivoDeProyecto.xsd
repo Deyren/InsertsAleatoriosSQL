@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+Dale moreno
+-->
+
+<xs:schema version="1.0"   xmlns:xs="http://www.w3.org/2001/XMLSchema"     
+           elementFormDefault="qualified">
+
+<!--  ELEMENTO RAIZ  contiene un elemento nombre y un elemento TABLAS-->
+    <xs:element name="creadordeinserts">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" type="xs:string"/>                  
+                <xs:element name="tablas" type="tablas"/>             
+            </xs:sequence>            
+        </xs:complexType>
+    </xs:element>
+    
+<!--  ELEMENTO TABLAS contiene de 0 a muchos elementos TABLA -->
+    <xs:complexType name="tablas">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="tabla" type="tabla"/>    
+        </xs:choice>
+        <xs:attribute name="cantidad" use="required"></xs:attribute>
+    </xs:complexType>
+    
+<!--  ELEMENTO TABLA contiene un elemento COLUMNAS -->
+    <xs:complexType name="tabla">
+        <xs:sequence>
+            <xs:element name="columnas" type="columnas"/>
+        </xs:sequence>            
+        <xs:attribute name="nombre" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+<!--  ELEMENTO COLUMNAS contiene de 0 a muchos elementos COLUMNA -->
+    <xs:complexType name="columnas">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="columna" type="columna"/>
+        </xs:choice>
+        <xs:attribute name="cantidad"  type="xs:string" use="required"/>
+    </xs:complexType>
+    
+<!--  ELEMENTO COLUMNA contiene los datos de cada columna -->
+    <xs:complexType name="columna">
+        <xs:sequence>
+            <xs:element name="tipodedato" type="xs:string"/>
+            <xs:element name="claveprimaria" type="xs:boolean"/>
+            <xs:element name="claveforanea" type="xs:boolean"/>
+            <xs:element name="nulo" type="xs:boolean"/>
+            <xs:element name="mayoroigual" type="xs:string"/>
+            <xs:element name="valormaximo" type="xs:integer"/>
+            <xs:element name="tablaalaqueapunta" type="xs:string"/>              
+        </xs:sequence>
+        <xs:attribute name="numero"  type="xs:integer" use="required"/> 
+    </xs:complexType>
+        
+</xs:schema>
