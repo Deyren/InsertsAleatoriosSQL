@@ -1,11 +1,11 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.gestiondearchivos;
+package insertsaleatorios.gestiondearchivos;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.modelo.Columna;
-import creadordeinsertssql.modelo.Tabla;
+import insertsaleatorios.Datos;
+import insertsaleatorios.modelo.Columna;
+import insertsaleatorios.modelo.Tabla;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -163,7 +163,7 @@ public class GestorDeArchivosDelProyecto {
             xapa = SAXParserFactory.newInstance();
             ppp = xapa.newSAXParser();
             ppp.parse(archivoXML, saxCallbacks);
-        } catch (ParserConfigurationException | SAXException | IOException ex) {
+        } catch (ParserConfigurationException | SAXException  ex) {
             Logger.getLogger(GestorDeArchivosDelProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
         

@@ -1,12 +1,12 @@
-package creadordeinsertssql.controlador;
+package insertsaleatorios.controlador;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.DobleArray;
-import creadordeinsertssql.modelo.Columna;
-import creadordeinsertssql.modelo.Tabla;
-import creadordeinsertssql.vista.PanelDeColumnas;
-import creadordeinsertssql.vista.VentanaColumna;
-import creadordeinsertssql.vista.componentes.PanelBasico;
+import insertsaleatorios.Datos;
+import insertsaleatorios.DobleArray;
+import insertsaleatorios.modelo.Columna;
+import insertsaleatorios.modelo.Tabla;
+import insertsaleatorios.vista.PanelDeColumnas;
+import insertsaleatorios.vista.VentanaColumna;
+import insertsaleatorios.vista.componentes.PanelBasico;
 import java.util.ArrayList;
 
 /**

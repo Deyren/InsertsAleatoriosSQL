@@ -1,10 +1,10 @@
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.controlador.GestorDeColumnas;
-import creadordeinsertssql.controlador.GestorVentanaPrincipal;
-import creadordeinsertssql.modelo.Tabla;
-import creadordeinsertssql.vista.componentes.PanelBasico;
-import creadordeinsertssql.vista.componentes.BarraDeHerramientasPanelDeColumnas;
+import insertsaleatorios.controlador.GestorDeColumnas;
+import insertsaleatorios.controlador.GestorVentanaPrincipal;
+import insertsaleatorios.modelo.Tabla;
+import insertsaleatorios.vista.componentes.PanelBasico;
+import insertsaleatorios.vista.componentes.BarraDeHerramientasPanelDeColumnas;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;

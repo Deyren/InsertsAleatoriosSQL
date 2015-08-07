@@ -1,13 +1,13 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.controlador.GestorDeTablas;
-import creadordeinsertssql.controlador.GestorVentanaPrincipal;
-import creadordeinsertssql.vista.componentes.PanelBasico;
-import creadordeinsertssql.vista.componentes.BarraDeHerramientasPanelDeTablas;
+import insertsaleatorios.Datos;
+import insertsaleatorios.controlador.GestorDeTablas;
+import insertsaleatorios.controlador.GestorVentanaPrincipal;
+import insertsaleatorios.vista.componentes.PanelBasico;
+import insertsaleatorios.vista.componentes.BarraDeHerramientasPanelDeTablas;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 

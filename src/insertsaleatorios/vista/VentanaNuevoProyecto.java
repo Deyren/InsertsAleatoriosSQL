@@ -1,9 +1,9 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.Datos;
+import insertsaleatorios.Datos;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.File;

@@ -1,12 +1,12 @@
 /*
  * CREADOR DE INSERTS
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.controlador.GestorDeColumnas;
-import creadordeinsertssql.modelo.Columna;
-import creadordeinsertssql.modelo.Tabla;
+import insertsaleatorios.Datos;
+import insertsaleatorios.controlador.GestorDeColumnas;
+import insertsaleatorios.modelo.Columna;
+import insertsaleatorios.modelo.Tabla;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;

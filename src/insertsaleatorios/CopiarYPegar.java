@@ -1,7 +1,7 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql;
+package insertsaleatorios;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;

@@ -1,13 +1,13 @@
 /*
  * Moreno
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.controlador.GestorVentanaPrincipal;
-import creadordeinsertssql.gestiondearchivos.GestorDeArchivosDelProyecto;
-import creadordeinsertssql.vista.componentes.BarraDeHerramientasBasico;
-import creadordeinsertssql.vista.componentes.RMenuItem;
+import insertsaleatorios.Datos;
+import insertsaleatorios.controlador.GestorVentanaPrincipal;
+import insertsaleatorios.gestiondearchivos.GestorDeArchivosDelProyecto;
+import insertsaleatorios.vista.componentes.BarraDeHerramientasBasico;
+import insertsaleatorios.vista.componentes.RMenuItem;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout; 

@@ -1,10 +1,10 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.controlador;
+package insertsaleatorios.controlador;
 
-import creadordeinsertssql.vista.VentanaPrincipal;
-import creadordeinsertssql.vista.componentes.PanelBasico;
+import insertsaleatorios.vista.VentanaPrincipal;
+import insertsaleatorios.vista.componentes.PanelBasico;
 import java.awt.BorderLayout;
 
 

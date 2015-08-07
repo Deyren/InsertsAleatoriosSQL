@@ -1,9 +1,9 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.vista.componentes;
+package insertsaleatorios.vista.componentes;
 
-import creadordeinsertssql.Datos;
+import insertsaleatorios.Datos;
 import java.awt.FlowLayout;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;

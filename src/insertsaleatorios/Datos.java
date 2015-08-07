@@ -1,8 +1,8 @@
-package creadordeinsertssql;
+package insertsaleatorios;
 
-import creadordeinsertssql.gestiondearchivos.GestorDeArchivosDelProyecto;
-import creadordeinsertssql.modelo.Tabla;
-import creadordeinsertssql.vista.PanelDeTablas;
+import insertsaleatorios.gestiondearchivos.GestorDeArchivosDelProyecto;
+import insertsaleatorios.modelo.Tabla;
+import insertsaleatorios.vista.PanelDeTablas;
 import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package creadordeinsertssql.vista.componentes;
+package insertsaleatorios.vista.componentes;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.modelo.Tabla;
-import creadordeinsertssql.vista.PanelDeColumnas;
-import creadordeinsertssql.vista.PanelDeTablas;
+import insertsaleatorios.Datos;
+import insertsaleatorios.modelo.Tabla;
+import insertsaleatorios.vista.PanelDeColumnas;
+import insertsaleatorios.vista.PanelDeTablas;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;

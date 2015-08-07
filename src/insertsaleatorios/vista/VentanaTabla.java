@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.controlador.GestorVentanaPrincipal;
-import creadordeinsertssql.modelo.Tabla;
+import insertsaleatorios.controlador.GestorVentanaPrincipal;
+import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;

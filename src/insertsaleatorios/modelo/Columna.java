@@ -1,6 +1,6 @@
-package creadordeinsertssql.modelo;
+package insertsaleatorios.modelo;
 
-import creadordeinsertssql.Datos;
+import insertsaleatorios.Datos;
 
 /**
  * Representa una columna con todos los datos necesarios. <br>

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package creadordeinsertssql.vista;
+package insertsaleatorios.vista;
 
-import creadordeinsertssql.modelo.Columna;
+import insertsaleatorios.modelo.Columna;
 
 /**
  *Vista general de una columna. La vista no es editable

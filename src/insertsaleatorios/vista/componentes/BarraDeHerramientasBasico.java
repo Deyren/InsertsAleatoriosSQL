@@ -1,7 +1,7 @@
 /*
  * Dale moreno
  */
-package creadordeinsertssql.vista.componentes;
+package insertsaleatorios.vista.componentes;
 
 import java.awt.Color;
 import java.awt.Dimension;

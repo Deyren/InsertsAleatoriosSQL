@@ -1,4 +1,4 @@
-package creadordeinsertssql.modelo;
+package insertsaleatorios.modelo;
 
 import java.util.ArrayList;
 

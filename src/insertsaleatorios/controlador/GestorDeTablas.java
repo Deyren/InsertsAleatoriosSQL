@@ -1,11 +1,11 @@
-package creadordeinsertssql.controlador;
+package insertsaleatorios.controlador;
 
-import creadordeinsertssql.Datos;
-import creadordeinsertssql.DobleArray;
-import creadordeinsertssql.modelo.Tabla;
-import creadordeinsertssql.vista.PanelDeTablas;
-import creadordeinsertssql.vista.VentanaTabla;
-import creadordeinsertssql.vista.componentes.PanelBasico;
+import insertsaleatorios.Datos;
+import insertsaleatorios.DobleArray;
+import insertsaleatorios.modelo.Tabla;
+import insertsaleatorios.vista.PanelDeTablas;
+import insertsaleatorios.vista.VentanaTabla;
+import insertsaleatorios.vista.componentes.PanelBasico;
 import java.util.ArrayList;
 import javax.swing.SpringLayout;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
