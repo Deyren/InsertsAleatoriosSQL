@@ -59,13 +59,13 @@ public class GestorDeArchivosDelProyecto {
     }
 
     /**
-     * Crea el xml con los datos de las tablas y sus columnas.
+     * Crea el xml con los datos de las tablas y columnas de Datos.tablas.
      *
-     * @param lasTablas el array de tablas
+     * 
      * @param archivo el archivo donde se guardará. Si existe lo sobreescribe
      *
      */
-    public void crearArchivo(ArrayList<Tabla> lasTablas, File archivo) {
+    public void crearArchivo( File archivo) {
 
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -87,15 +87,15 @@ public class GestorDeArchivosDelProyecto {
             agregarDatosDeInicioAlArchivo(raiz, archivo.getAbsolutePath());
             //Elemento tablas solo hay 1
             Element tablas = doc.createElement("tablas");
-            tablas.setAttribute("cantidad", String.valueOf(lasTablas.size()));
+            tablas.setAttribute("cantidad", String.valueOf(Datos.tablas.size()));
             raiz.appendChild(doc.createComment("Tablas del proyecto"));
             raiz.appendChild(tablas);
 
             //Recorre las tablas para ir agregando una a una.
-            lasTablas.stream().forEach((lasTabla) -> {
+            Datos.tablas.stream().forEach((lasTabla) -> {
                 agregarTablaAlXml(lasTabla, tablas);
             });
-
+ 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
 
@@ -253,7 +253,7 @@ public class GestorDeArchivosDelProyecto {
      * @param elXsd
      * @return 
      */
-    static boolean validarXMLconXSD(File elXml) {
+    private static boolean validarXMLconXSD(File elXml) {
         try {
             InputStream xml = new FileInputStream(elXml);
             InputStream xsd = new FileInputStream(new File(Datos.RUTA_DEL_XSD));
@@ -280,7 +280,7 @@ public class GestorDeArchivosDelProyecto {
      * Cada vez que abre un archivo del proyecto para leer,
      * compara el archivo con su xsd, esto es por si el XSD no existe por lo que sea. <br>
      */
-    private void crearElXSD() {
+    private static void crearElXSD() {
         try {
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(Datos.RUTA_DEL_XSD)))) {
                 bw.write(Datos.contenidoDelXSD());
@@ -300,7 +300,7 @@ public class GestorDeArchivosDelProyecto {
      * Si es true es que el archivo esta bien.
      * @return 
      */
-    private boolean xsdCorrecto(){
+    private static boolean xsdCorrecto(){
             boolean salida=false;
         try {
             //Guarda el contenido del archivo en un String

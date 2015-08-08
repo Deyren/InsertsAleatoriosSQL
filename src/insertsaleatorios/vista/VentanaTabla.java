@@ -7,6 +7,7 @@ package insertsaleatorios.vista;
 
 import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,6 +50,9 @@ public class VentanaTabla extends javax.swing.JPanel {
      */
     public VentanaTabla(Tabla suTabla) {
         initComponents(); 
+        setSize(new Dimension(80,100));
+        setMinimumSize(new Dimension(80,100));
+        setMaximumSize(new Dimension(200, 100));
         vistasDeColumnas = new ArrayList<>();
         this.suTabla = suTabla;
         panelFondo.setLayout(new GridLayout());           
@@ -61,6 +65,7 @@ public class VentanaTabla extends javax.swing.JPanel {
                 }).forEach((vc) -> {
                     panelFondo.add(vc);
                 });
+        //setVisible(true);
     }
 
     private void mostrarPopup(java.awt.event.MouseEvent evt){

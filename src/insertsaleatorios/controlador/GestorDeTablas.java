@@ -6,7 +6,6 @@ import insertsaleatorios.modelo.Tabla;
 import insertsaleatorios.vista.PanelDeTablas;
 import insertsaleatorios.vista.VentanaTabla;
 import insertsaleatorios.vista.componentes.PanelBasico;
-import java.util.ArrayList;
 
 /**
  * Esta clase es para gestional el panel de tablas.<br>
@@ -24,7 +23,7 @@ public class GestorDeTablas {
      */
     private final PanelDeTablas panel;
  
-    private final DobleArray<Tabla, VentanaTabla> tablasYVistas;
+    private final DobleArray<Tabla, VentanaTabla> tablasYVentanas;
  
     /**
      * Metodo estatico que devuelve un objeto de esta clase
@@ -43,21 +42,19 @@ public class GestorDeTablas {
  */
     private GestorDeTablas(PanelDeTablas vista) {
         this.panel = vista;
-        tablasYVistas = new DobleArray<>();        
+        tablasYVentanas = new DobleArray<>();        
         
     }
     /**
-     * Se le pasa el array de tablas, <br>
-       el metodo crea un panel para cada tabla
- y lo añade a su array tablasYVistas. <br>
-     *
-     * @param tablas
+     * Rellena su array de tablasYVentanas
+     * con las tablas de Datos.tablas 
+     * Y añade un objeto VentanaTabla
+     * por cada tabla, <br>
      */
-    public final void pasarTablas(ArrayList<Tabla> tablas) {
-        tablas.stream().forEach((tabla) -> {
+    public final void pasarTablas() {
+        Datos.tablas.stream().forEach((tabla) -> {
             VentanaTabla vt = new VentanaTabla(tabla);
-            tablasYVistas.add(tabla, vt);
-            
+            tablasYVentanas.add(tabla, vt);         
         });
         actualizarVista();
     }
@@ -72,22 +69,22 @@ public class GestorDeTablas {
         VentanaTabla vt = new VentanaTabla(tabla);//Se le pasa la tabla a la panel.
         vt.setVisible(true);
          Datos.tablas.add(tabla);//Agrega la tabla al array estatico
-        tablasYVistas.add(tabla, vt);//Añade la tabla y la panel de esa tabla.
+        tablasYVentanas.add(tabla, vt);//Añade la tabla y la panel de esa tabla.
         this.panel.getPanelDeFondo().removeAll();//Borra lo que haya en la panel       
         //Recorre el arrayList
-        for (int i = 0; i < tablasYVistas.size(); i++) {
-           // Tabla tx = tablasYVistas.getKey(i);//Obtiene la tabla
-            vt = tablasYVistas.getValue(i);//Obtiene la panel de cada elemento del array
+        for (int i = 0; i < tablasYVentanas.size(); i++) {
+           // Tabla tx = tablasYVentanas.getKey(i);//Obtiene la tabla
+            vt = tablasYVentanas.getValue(i);//Obtiene la panel de cada elemento del array
             this.panel.getPanelDeFondo().add(vt);//Añade las vistas al panel de fondo           
         }            
           
           PanelBasico.actualizarPanel(panel);
-         panel.getPanelDeFondo().updateUI();
+      //   panel.getPanelDeFondo().updateUI();
       
     }
      
      private void actualizarVista(){
-         tablasYVistas.getClave().stream().map((tab) -> new VentanaTabla(tab)).map((vt) -> {
+         tablasYVentanas.getClave().stream().map((tab) -> new VentanaTabla(tab)).map((vt) -> {
              //Se le pasa la tabla a la panel.
              vt.setVisible(true);
             return vt;

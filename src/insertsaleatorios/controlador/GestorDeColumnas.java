@@ -18,7 +18,7 @@ public class GestorDeColumnas {
 
     private int numeroParaAsignarAColumnas = 1;
     private final PanelDeColumnas panel;
-    private final DobleArray<Columna, VentanaColumna> columnasAuxiliares;   //auxliar para ig guardando los cambios
+    private final DobleArray<Columna, VentanaColumna> columnasYVentanas;   //auxliar para ig guardando los cambios
     //private DobleArray<Columna, VentanaColumna> columnasYVentanas;
     /**
      * Tabla a la que pertenece la columna de este gestor
@@ -32,13 +32,13 @@ public class GestorDeColumnas {
     private GestorDeColumnas(PanelDeColumnas vista, Tabla suTabla) {
         this.panel = vista;
         this.suTabla = suTabla;
-        this.columnasAuxiliares = new DobleArray<>();
+        this.columnasYVentanas = new DobleArray<>();
 
         // this.columnasYVentanas = new DobleArray();
     }
 
     public ArrayList<Columna> getColumnas() {
-        return columnasAuxiliares.getClave();
+        return columnasYVentanas.getClave();
     }
 
     /**
@@ -66,7 +66,7 @@ public class GestorDeColumnas {
         ven.getCheckNulo().setSelected(col.isNulo());
         ven.getComboMenorOIgual().setSelectedItem(col.getMayorOIgual());
         ven.getTextoValorMaximo().setText(String.valueOf(col.getValorMaximo()));
-        ven.getTextoTablaALaQueApunta().setText(col.getTablaALaQueApunta());
+        //ven.getTextoTablaALaQueApunta().setText(col.getTablaALaQueApunta());
     }
 
     /**
@@ -80,14 +80,14 @@ public class GestorDeColumnas {
         cols.stream().forEach((col) -> {
             VentanaColumna vent = new VentanaColumna(col, this);
             asignarValoresDeColumnasAVistas(col, vent);
-            columnasAuxiliares.add(col, vent);
+            columnasYVentanas.add(col, vent);
         });
         actualizarVista();
     }
 
     private void actualizarVista() {
-        //  for (Columna col : columnasAuxiliares.getClave()) 
-        columnasAuxiliares.getClave().stream().map((col) -> 
+        //  for (Columna col : columnasYVentanas.getClave()) 
+        columnasYVentanas.getClave().stream().map((col) -> 
                 new VentanaColumna(col, this)).forEach((vent) -> {
             vent.setVisible(true);
         });
@@ -118,13 +118,13 @@ public class GestorDeColumnas {
         suColumna.setPrimaryKey(ven.getCheckClavePrimaria().isSelected());
         suColumna.setForeignKey(ven.getCheckClaveAgena().isSelected());
         suColumna.setNulo(ven.getCheckNulo().isSelected());
-        suColumna.setTablaALaQueApunta(ven.getTextoTablaALaQueApunta().getText());
+        suColumna.setTablaALaQueApunta(ven.getTextoTablaALaQueApunta());
     }
 
     private void guardarColumnasEnElArray() {
         // Guarda el array de columnas en la tabla que coincida suTabla.
         Datos.tablas.stream().filter((t) -> (t.equals(suTabla))).forEach((t) -> {
-            t.setColumnas(columnasAuxiliares.getClave());
+            t.setColumnas(columnasYVentanas.getClave());
         });
     }
 
@@ -140,17 +140,17 @@ public class GestorDeColumnas {
         columna.setMayorOIgual('0');
         columna.setValorMaximo(0);
         VentanaColumna nuke = new VentanaColumna(columna, this);
-        columnasAuxiliares.add(columna, nuke);
+        columnasYVentanas.add(columna, nuke);
         guardarColumnasEnElArray();
         panel.setFondo(nuke);
     }
 
-    public void quitarColumna() {
-        int pos = columnasAuxiliares.size();
+    public void quitarUltimaColumna() {
+        int pos = columnasYVentanas.size();
         if (pos > 0) {
-            columnasAuxiliares.getValue(pos - 1).setVisible(false);
+            columnasYVentanas.getValue(pos - 1).setVisible(false);
             //Columna.reducirNumeroDeColumna();
-            columnasAuxiliares.remove(pos - 1);
+            columnasYVentanas.remove(pos - 1);
             numeroParaAsignarAColumnas--;
 
         }

@@ -46,7 +46,6 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="panelCheckBoxes" alignment="0" max="32767" attributes="0"/>
-              <Component id="textoTablaALaQueApunta" alignment="0" max="32767" attributes="0"/>
               <Component id="jLabel7" alignment="0" pref="75" max="32767" attributes="0"/>
               <Component id="comboTipoDeDato" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="1" attributes="0">
@@ -61,6 +60,7 @@
                   </Group>
                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
+              <Component id="comboTablaALaQueApunta" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -81,7 +81,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="textoTablaALaQueApunta" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboTablaALaQueApunta" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -207,7 +207,17 @@
             <Property name="text" type="java.lang.String" value="Tabla externa"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textoTablaALaQueApunta">
+        <Component class="javax.swing.JComboBox" name="comboTablaALaQueApunta">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

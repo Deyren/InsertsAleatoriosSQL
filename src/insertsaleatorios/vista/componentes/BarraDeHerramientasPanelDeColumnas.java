@@ -30,14 +30,14 @@ public class BarraDeHerramientasPanelDeColumnas extends BarraDeHerramientasBasic
      * Array de botones.
      * Se crearán tantos botones como nombres.
      */
-    private final JButton[] Botones;
+    private final JButton[] botones;
 
     /**
      * Obtiene el array de botones.
      * @return 
      */
     public JButton[] getBotones() {
-        return Botones;
+        return botones;
     }
 
     /**
@@ -49,13 +49,13 @@ public class BarraDeHerramientasPanelDeColumnas extends BarraDeHerramientasBasic
     private BarraDeHerramientasPanelDeColumnas(String name, PanelDeColumnas panel) {
         super(name);
         this.panel = panel;
-        Botones = new JButton[nombres.length];
+        botones = new JButton[nombres.length];
         super.setFloatable(false);
 
         //Añade los botones a la barra. <br>
         for (int i = 0; i < nombres.length; i++) {
-            Botones[i] = addBoton(nombres[i]);
-            add(Botones[i]);
+            botones[i] = addBoton(nombres[i]);
+            add(botones[i]);
 
         }
         setVisible(true);
@@ -81,7 +81,7 @@ public class BarraDeHerramientasPanelDeColumnas extends BarraDeHerramientasBasic
      */
     public static BarraDeHerramientasPanelDeColumnas getInstance(String name, PanelDeColumnas panel) {
         BarraDeHerramientasPanelDeColumnas tb = new BarraDeHerramientasPanelDeColumnas(name, panel);
-        for (JButton boton : tb.Botones) {
+        for (JButton boton : tb.botones) {
             //Agrega el listener a los botones.
             //pasandole el propio objeto que contiene los botones.
             boton.addMouseListener(tb);
@@ -100,7 +100,7 @@ public class BarraDeHerramientasPanelDeColumnas extends BarraDeHerramientasBasic
         if (jb.getName().equals(nombres[0])) {//Boton nueva columna pulsado
             panel.getGestor().nuevaColumna();
         } else if (jb.getName().equals(nombres[1])) {//Boton quitar columna pulsado
-            panel.getGestor().quitarColumna();
+            panel.getGestor().quitarUltimaColumna();
         } else if (jb.getName().equals(nombres[2])) {//Boton atras pulsado            
             for(Tabla t: Datos.tablas){
                 if(t.equals(panel.getTablaQueEstaEnElPanel())){

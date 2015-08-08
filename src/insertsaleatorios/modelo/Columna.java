@@ -141,7 +141,7 @@ public class Columna {
  * @param tablaALaQueApunta Si clave foranea es true, aqui esta el nombre de la tabla a la que apunta.
  */
     public Columna(Tabla tabla,int numeroDeColumna,Datos.TiposDeDato tipoDeDato, Character mayorOIgual, boolean primaryKey, boolean foreignKey, boolean Nulo, Integer valorMaximo, String tablaALaQueApunta) {
-          this.tablaDeEstaColumna=tabla;
+        this.tablaDeEstaColumna=tabla;
         this.numeroDeColumna = numeroDeColumna;
         this.tipoDeDato = tipoDeDato;
         this.mayorOIgual = mayorOIgual;

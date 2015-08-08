@@ -4,6 +4,7 @@
 package insertsaleatorios.vista.componentes;
 
 import insertsaleatorios.Datos;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -42,7 +43,8 @@ public class PanelBasico extends JInternalFrame{
         panelDeFondo = new JPanel();           
         panelDeFondo.setBackground(Datos.COLOR_DE_FONDO_DE_PANELES);       
         panelDeFondo.setBorder(null);
-        panelDeFondo.setLayout(new FlowLayout(FlowLayout.LEFT)); 
+        panelDeFondo.setLayout(null);
+        //panelDeFondo.setLayout(new FlowLayout(FlowLayout.LEFT)); 
     }
     /**
      * Actualiza el panel con updateUI() del panel,
@@ -62,7 +64,7 @@ public class PanelBasico extends JInternalFrame{
          panel.updateUI();
          BasicInternalFrameUI bi = (BasicInternalFrameUI) panel.getUI();
          bi.setNorthPane(null);
-         //panel.setVisible(true);
+        // panel.setVisible(true);
      }
    
 }

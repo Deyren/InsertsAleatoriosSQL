@@ -1,5 +1,5 @@
 /*
- * Moreno
+ * Dale Moreno
  */
 package insertsaleatorios.vista;
 
@@ -45,7 +45,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * Para establecer el idioma en el programa. <br>
      * DE momento solo español :)
      */
-    private final Datos.Idiomas idioma;//NO HACER FINAL. para poder cambiarlo en opciones
+    private final Datos.Idiomas idioma;
    /**
     * Array que contendrá los elementos de la barra de menu.
     */
@@ -170,13 +170,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         if (!Datos.tablas.isEmpty()) {
                                             GestorDeArchivosDelProyecto can = new GestorDeArchivosDelProyecto();
                                             String rutaCompleta = Datos.CARPETA_DEL_PROYECTO + Datos.nombreDelProyectoActual + Datos.EXTENSION_DE_ARCHIVO_DEL_PROYECTO;
-                                            can.crearArchivo(Datos.tablas, new File(rutaCompleta));
+                                            can.crearArchivo(new File(rutaCompleta));
                                         } else {
                                             JOptionPane.showMessageDialog(null, "No hay tablas que guardar.", "No hay tablas", JOptionPane.ERROR_MESSAGE);
                                         }
-
                                     }
-
                                     //Boton probar pulsado.
                                     if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.probarVistaColumnas.name())) {
                                         //panelParaVarios=null;
@@ -264,7 +262,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             VentanaPrincipal vp = new VentanaPrincipal();
-
             //Se le pasa la ventana al gestor para que tenga una referencia de ella.
             GestorVentanaPrincipal.establecerVentanaPrincipal(vp);
             vp.setVisible(true);

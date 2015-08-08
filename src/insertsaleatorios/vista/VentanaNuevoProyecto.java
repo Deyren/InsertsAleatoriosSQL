@@ -8,6 +8,8 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *Clase que muestra la ventana para crear un
@@ -202,6 +204,8 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         JFileChooser jfc = new JFileChooser();
         jfc.setCurrentDirectory(new File(Datos.CARPETA_DEL_PROYECTO));
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        FileFilter ff=new FileNameExtensionFilter("Archivo de proyecto", Datos.EXTENSION_DE_ARCHIVO_DEL_PROYECTO.substring(1));
+        jfc.addChoosableFileFilter(ff);
         int result = jfc.showSaveDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File archivo = jfc.getSelectedFile();

@@ -3,6 +3,7 @@
  */
 package insertsaleatorios.vista.componentes;
 
+import insertsaleatorios.Datos;
 import insertsaleatorios.vista.PanelDeTablas;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -60,13 +61,19 @@ private static final String[] nombres=new String[]{
         if (bot.getName().equals(nombres[0])) {//Boton nueva tabla pulsado
             //Pide el nombre de la nueva tabla
             String tablename = JOptionPane.showInputDialog(null, "Nombre de la tabla", "Nueva tabla...", JOptionPane.QUESTION_MESSAGE);
+        
+            //Si ya hay una tabla con ese nombre...
+            if(Datos.nombreDeTablaExiste(tablename)){
+                JOptionPane.showMessageDialog(panel, "Tabla existe","",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (tablename != null) {
                 if ( ! tablename.isEmpty() ) {                    
                     panel.getGestor().nuevaTabla(tablename);//Añade la tabla con el metodo del gestor                   
-                    PanelBasico.actualizarPanel(panel);
-                   
-                }else{                                                 
-                      panel.getGestor().nuevaTabla("HerramientasDeTablas");//Añade la tabla con el metodo del gestor                   
+                    PanelBasico.actualizarPanel(panel);                 
+                }else{
+                    //Solo para pruebas y no tener que poner el nombre de la tabla.
+                      panel.getGestor().nuevaTabla("HerramientasDeTablas");                  
                      PanelBasico.actualizarPanel(panel);
                    
                 }
