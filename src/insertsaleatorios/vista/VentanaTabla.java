@@ -5,29 +5,32 @@
  */
 package insertsaleatorios.vista;
 
+import insertsaleatorios.Datos;
 import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 /**
- *Es el panel que representa una tabla y
- * se muestra un panel por cada tabla que se tenga. <br>
+ * Es el panel que representa una tabla y se muestra un panel por cada tabla que
+ * se tenga. <br>
+ *
  * @author Ruben
  */
 public class VentanaTabla extends javax.swing.JPanel {
 
     /**
      * Tabla de la que recoge los datos a mostrar.
-     * */
+     *
+     */
     private final Tabla suTabla;//Se le pasa al constructor
     /**
-     *  popup que aparece al hace click izquierdo sobre la vista.
+     * popup que aparece al hace click izquierdo sobre la vista.
      */
     private JPopupMenu elPopup;
     /**
@@ -35,11 +38,7 @@ public class VentanaTabla extends javax.swing.JPanel {
      * Contiene el texto del popup y el evento click.<br>
      */
     private JMenuItem elMenuItem;
-    
-    /**
-     * Un array de vistas simples de los datos de una columna de la tabla.
-     */
-    private final ArrayList<VistaColumna> vistasDeColumnas;
+
     /**
      * Creates new form VistaDeTabla.<br>
      *
@@ -47,48 +46,65 @@ public class VentanaTabla extends javax.swing.JPanel {
      * Cada vista contiene una tabla de la que obtiene los datos.<br>
      *
      * @param suTabla
+     * @param posicion
      */
-    public VentanaTabla(Tabla suTabla) {
+    public VentanaTabla(Tabla suTabla, Point posicion) {
         initComponents(); 
-        setSize(new Dimension(80,100));
-        setMinimumSize(new Dimension(80,100));
-        setMaximumSize(new Dimension(200, 100));
-        vistasDeColumnas = new ArrayList<>();
+       //textoNombreDeLaTabla.setFont(Font.decode("UTF-8"));
+      // textoNombreDeLaTabla.setFont(new java.awt.Font("Amstrad CPC464", 1, 18)); // NOI18N
+        setMinimumSize(Datos.tamañoDeVentanaDeTabla);
+        textoNombreDeLaTabla.setText(suTabla.getNombre());
+        textoInfo.setText("Columnas: "+suTabla.getColumnas().size());
+        actualizarTamaño();
+      
+        setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.MOVE_CURSOR));
+        setLocation(posicion);
+       
+        //setSize(Datos.tamañoDeVentanaDeTabla);
+        //setMinimumSize(new Dimension(80,100));
+        // setMaximumSize(new Dimension(200, 100));
         this.suTabla = suTabla;
-        panelFondo.setLayout(new GridLayout());           
-        setBackground(new Color(20, 40, 40));       
-        this.textoTitulo.setText(this.suTabla.getNombre());   
-        suTabla.getColumnas().stream().map((col)
-                -> new VistaColumna(col)).map((vc) -> {
-                    vistasDeColumnas.add(vc);
-                    return vc;
-                }).forEach((vc) -> {
-                    panelFondo.add(vc);
-                });
-        //setVisible(true);
+        setBackground(new Color(20, 40, 240));//Color del fondo del titulo de la tabla
+        textoNombreDeLaTabla.setEnabled(false);
     }
 
-    private void mostrarPopup(java.awt.event.MouseEvent evt){
-           if (elPopup == null || elMenuItem == null) {
-                elPopup = new JPopupMenu();
-                elMenuItem = new JMenuItem("Editar " + suTabla.getNombre());
-                elPopup.setLocation(evt.getLocationOnScreen());
-                elMenuItem.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mousePressed(MouseEvent e) {//Se pulsa sobre editar                        
-                        PanelDeColumnas.getInstance(suTabla);                      
-                        //VentanaPrincipal.setPanelPrincipal(pacol);
-                       // GestorVentanaPrincipal.establecerPanelDeFondo(pacol);
-                        elPopup.setVisible(false);
-                        elPopup = null;
-                        elMenuItem = null;
-                        System.gc();
-                    }
-                });
-                elPopup.add(elMenuItem);
-                elPopup.setVisible(true);
+    /**
+     * Actualiza el tamaño del panel en funcion del tamaño del nombre de la tabla. 
+     */
+    private void actualizarTamaño(){   
+            int letras=10;
+            if(textoNombreDeLaTabla.getText().length()>letras){
+                letras=textoNombreDeLaTabla.getText().length();
             }
-        
+            
+          Dimension dimm=new Dimension(letras*10, Datos.tamañoDeVentanaDeTabla.height);
+          textoNombreDeLaTabla.setSize(dimm.width,dimm.height/2);
+       
+          setSize(dimm);
+          updateUI();
+    }
+    
+    private void mostrarPopup(java.awt.event.MouseEvent evt) {
+        if (elPopup == null || elMenuItem == null) {
+            elPopup = new JPopupMenu();
+            elMenuItem = new JMenuItem("Editar " + suTabla.getNombre());
+            elPopup.setLocation(evt.getLocationOnScreen());
+            elMenuItem.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {//Se pulsa sobre editar                        
+                    PanelDeColumnas.getInstance(suTabla);
+                    //VentanaPrincipal.setPanelPrincipal(pacol);
+                    // GestorVentanaPrincipal.establecerPanelDeFondo(pacol);
+                    elPopup.setVisible(false);
+                    elPopup = null;
+                    elMenuItem = null;
+                    System.gc();
+                }
+            });
+            elPopup.add(elMenuItem);
+            elPopup.setVisible(true);
+        }
+
     }
     
     /**
@@ -100,12 +116,11 @@ public class VentanaTabla extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textoTitulo = new javax.swing.JLabel();
-        panelFondo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        textoNombreDeLaTabla = new javax.swing.JTextField();
+        textoInfo = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        setMaximumSize(new java.awt.Dimension(32767, 131));
         setName(""); // NOI18N
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -113,57 +128,61 @@ public class VentanaTabla extends javax.swing.JPanel {
             }
         });
 
-        textoTitulo.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 18)); // NOI18N
-        textoTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        textoTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        textoTitulo.setText("Titulo");
+        textoNombreDeLaTabla.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 18)); // NOI18N
+        textoNombreDeLaTabla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        textoNombreDeLaTabla.setAutoscrolls(false);
+        textoNombreDeLaTabla.setSelectionColor(new java.awt.Color(0, 102, 255));
+        textoNombreDeLaTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                textoNombreDeLaTablaMouseClicked(evt);
+            }
+        });
+        textoNombreDeLaTabla.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textoNombreDeLaTablaKeyPressed(evt);
+            }
+        });
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(0, 100));
+        textoInfo.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        textoInfo.setText("Columnas:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(textoNombreDeLaTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+            .addComponent(textoInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(textoNombreDeLaTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(textoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        javax.swing.GroupLayout panelFondoLayout = new javax.swing.GroupLayout(panelFondo);
-        panelFondo.setLayout(panelFondoLayout);
-        panelFondoLayout.setHorizontalGroup(
-            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-        );
-        panelFondoLayout.setVerticalGroup(
-            panelFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        jPanel1.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(textoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(textoTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         // TODO add your handling code here:
-        if (evt.getButton() == MouseEvent.BUTTON3) {//Raton izquierdo pulsado sobre la vista de la tabla
-            mostrarPopup(evt);
+        if (evt.getButton() == MouseEvent.BUTTON3) {//Raton derecho pulsado sobre la vista de la tabla
+             if( ! textoNombreDeLaTabla.isEnabled()){// Solo muestra el popup cuando no se esta editando el texto.
+                mostrarPopup(evt);
+          }else{
+                 //Si el texto se esta editando, le pone el foco y selecciona todo el texto.
+                 textoNombreDeLaTabla.requestFocus();
+                 textoNombreDeLaTabla.setSelectionStart(0);
+             }
         } else if (evt.getButton() == MouseEvent.BUTTON1
                 || evt.getButton() == MouseEvent.BUTTON2) {
             if (elPopup != null) {
@@ -175,11 +194,57 @@ public class VentanaTabla extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_formMouseReleased
+    /**
+     *
+     * @param evt
+     */
+    private void textoNombreDeLaTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoNombreDeLaTablaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Si se pulsa ENTER...
+            if (textoNombreDeLaTabla.isEnabled()) {               
+                textoNombreDeLaTabla.setEnabled(false);
+                suTabla.setNombre(textoNombreDeLaTabla.getText().trim());
+            }
+             actualizarTamaño();
+        }
+         
+        
+    }//GEN-LAST:event_textoNombreDeLaTablaKeyPressed
+
+    
+    
+    
+    private void textoNombreDeLaTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoNombreDeLaTablaMouseClicked
+        // TODO add your handling code here:
+
+        if (evt.getButton() == MouseEvent.BUTTON3) {//Raton derecho pulsado sobre la vista de la tabla
+          if( ! textoNombreDeLaTabla.isEnabled()){// Solo muestra el popup cuando no se esta editando el texto.
+                mostrarPopup(evt);
+          }
+          
+        } else if (evt.getButton() == MouseEvent.BUTTON1
+                || evt.getButton() == MouseEvent.BUTTON2) {
+            if (evt.getClickCount() == 2) { // Boton 1 o 2 pulsado dos veces
+                if (!textoNombreDeLaTabla.isEnabled()) {
+                    textoNombreDeLaTabla.setEnabled(true);
+                    textoNombreDeLaTabla.setSelectionStart(0);//Hace que aparezca todo el texto seleccionado.
+                }
+            }
+
+            if (elPopup != null) {
+                elPopup.setVisible(false);
+                elPopup = null;
+            }
+
+        }
+
+
+    }//GEN-LAST:event_textoNombreDeLaTablaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel panelFondo;
-    private javax.swing.JLabel textoTitulo;
+    private javax.swing.JLabel textoInfo;
+    private javax.swing.JTextField textoNombreDeLaTabla;
     // End of variables declaration//GEN-END:variables
 }

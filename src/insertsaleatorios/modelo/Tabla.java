@@ -12,7 +12,11 @@ public class Tabla {
     /**
      * Nombre de la tabla. Se le pasa al constructor
      */
-    private final String nombre;
+    private String nombre;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
     
     private ArrayList<Columna> columnas;
     public String getNombre() {

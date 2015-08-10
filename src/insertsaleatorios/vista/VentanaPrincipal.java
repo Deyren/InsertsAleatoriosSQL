@@ -17,6 +17,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -24,11 +26,29 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 /**
  * Ventana que contiene el metodo Main. <br>
  * Tambien contiene la barra de menú. <br>
+ * 
+ *___________________ COSAS PARA CAMBIAR_________________________
+ * - Al guardar el archivo se puede simplemente serializar el array de Datos
+ *      en vez de crear y leer el XML, que da mucho mas trabajo.
+ * 
+ * - La ventana que representa una tabla no hace falta que tenga las
+ *      vistas de las columnas.
+ * 
+ *  - El boton de las barras de herramientas para crear tablas debe ser tipo switch, 
+ *      se clickea y se queda presionado hasta que se haga click en el panel de fondo, que
+ *      será cuando se agrege la nueva tabla en la posicion del ratón. 
+ * 
+ *  - El nombre de cada panel se establece en el propio panel en lugar de mostrar
+ *      el JOptionPane.
+ *      Haciendo doble click en el texto se podrá modificar el nombre. Como en StarUML.
+ *      
  *
  * @author Ruben
  */
@@ -99,6 +119,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+         try {
+             //Establece el estilo que tenga el sistema operativo
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.put("TextField.disabledForeground",Color.RED);
+        
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(VentanaTabla.class.getName()).log(Level.SEVERE, null, ex);
+        }
         setBackground(Color.lightGray);
         setLocation(200, 200);
         setTitle(Datos.NOMBRE_DEL_PROGRAMA);
@@ -113,8 +141,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panelFondo.setLayout(bl);
         panelFondo.setVisible(true);
         setContentPane(panelFondo);
-        setJMenuBar(barraDeMenu);
         iniciarBarraDeMenu();
+        setJMenuBar(barraDeMenu);
+      
 
     }
 
@@ -155,7 +184,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         //Establece el fondo a panel de tablas     
                                         jit.setAccelerator(KeyStroke.getKeyStroke("control N"));
 
-                                        VentanaNuevoProyecto vnp = new VentanaNuevoProyecto(new Point(200, 200));
+                                        VentanaNuevoProyecto vnp = new VentanaNuevoProyecto();
                                         vnp.setVisible(true);
 
                                     }

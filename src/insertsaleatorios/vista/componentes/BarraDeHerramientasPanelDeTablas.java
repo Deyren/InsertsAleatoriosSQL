@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class BarraDeHerramientasPanelDeTablas extends BarraDeHerramientasBasico implements MouseListener {
 private static final String[] nombres=new String[]{
-             "Nueva tabla","Editar tabla"        
+             "Nueva tabla"        
      };
     private final PanelDeTablas panel;//Panel al que pertenece    
     private final JButton[] Botones;//Botones de esta barra de herramientas.

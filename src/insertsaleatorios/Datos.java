@@ -3,6 +3,7 @@ package insertsaleatorios;
 import insertsaleatorios.gestiondearchivos.GestorDeArchivosDelProyecto;
 import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -45,6 +46,8 @@ public class Datos {
 
     public static final String RUTA_DEL_XSD = ".\\src\\creadordeinsertssql\\gestiondearchivos\\EsquemaDeArchivoDeProyecto.xsd";
 
+    public static Dimension tamañoDeVentanaDeTabla=new Dimension(120, 60);
+    
     /**
      * Seleccion de idiomas, de momento solo se usa español. <br>
      */
@@ -79,12 +82,10 @@ public class Datos {
      * Botones del menu Archivo de la barra de menu. <br>
      */
     public static enum MenuDeArchivoEnEspañol {
-
         Nuevo, Abrir, Guardar, probarVistaColumnas, Separador, Salir
     }
 
     public static enum MenuDeArchivoEnIngles {
-
         New, NewProyect, OpenProyect, Separator, Exit,
     }
 
@@ -130,7 +131,6 @@ public class Datos {
         GestorDeArchivosDelProyecto cac = new GestorDeArchivosDelProyecto();
         cac.crearArchivo(new File(Datos.CARPETA_DEL_PROYECTO
                 + nombreDelProyectoActual + Datos.EXTENSION_DE_ARCHIVO_DEL_PROYECTO));
-
     }
 
     /**

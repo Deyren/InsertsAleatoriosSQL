@@ -66,7 +66,6 @@ public class GestorDeColumnas {
         ven.getCheckNulo().setSelected(col.isNulo());
         ven.getComboMenorOIgual().setSelectedItem(col.getMayorOIgual());
         ven.getTextoValorMaximo().setText(String.valueOf(col.getValorMaximo()));
-        //ven.getTextoTablaALaQueApunta().setText(col.getTablaALaQueApunta());
     }
 
     /**
@@ -81,6 +80,7 @@ public class GestorDeColumnas {
             VentanaColumna vent = new VentanaColumna(col, this);
             asignarValoresDeColumnasAVistas(col, vent);
             columnasYVentanas.add(col, vent);
+            
         });
         actualizarVista();
     }
@@ -109,7 +109,6 @@ public class GestorDeColumnas {
         Datos.TiposDeDato ttip = Datos.TiposDeDato.valueOf(ven.getComboTipoDeDato().getSelectedItem().toString());
         suColumna.setTipoDeDato(ttip);
         suColumna.setMayorOIgual(ven.getComboMenorOIgual().getSelectedItem().toString().charAt(0));
-        //System.out.println("Valor maximo correcto: "+ven.getTextoValorMaximo().getText());
         if (ven.getTextoValorMaximo().getText().trim().isEmpty()) {
             suColumna.setValorMaximo(0);
         } else {
@@ -121,12 +120,6 @@ public class GestorDeColumnas {
         suColumna.setTablaALaQueApunta(ven.getTextoTablaALaQueApunta());
     }
 
-    private void guardarColumnasEnElArray() {
-        // Guarda el array de columnas en la tabla que coincida suTabla.
-        Datos.tablas.stream().filter((t) -> (t.equals(suTabla))).forEach((t) -> {
-            t.setColumnas(columnasYVentanas.getClave());
-        });
-    }
 
     /**
      * Añade una nueva columna. <br>
@@ -141,7 +134,6 @@ public class GestorDeColumnas {
         columna.setValorMaximo(0);
         VentanaColumna nuke = new VentanaColumna(columna, this);
         columnasYVentanas.add(columna, nuke);
-        guardarColumnasEnElArray();
         panel.setFondo(nuke);
     }
 

@@ -7,6 +7,7 @@ import insertsaleatorios.Datos;
 import insertsaleatorios.controlador.GestorDeColumnas;
 import insertsaleatorios.modelo.Columna;
 import insertsaleatorios.modelo.Tabla;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JCheckBox;
@@ -83,6 +84,7 @@ public class VentanaColumna extends javax.swing.JPanel implements ActionListener
         this.suColumna = columna;
         this.gestor = gestor;
         iniciarCampos();
+        setSize(new Dimension(150, 270));
         comprobacionesPeriodicas(100);
     }
 

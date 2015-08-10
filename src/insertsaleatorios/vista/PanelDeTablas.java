@@ -43,7 +43,7 @@ public class PanelDeTablas extends PanelBasico {
     private PanelDeTablas() {
         super();      
         jsp = new JScrollPane(super.panelDeFondo);//Agrega el panel al panel con scroll  
-        //jsp.getVerticalScrollBar().setUnitIncrement(10);//Incremento de la barra de scroll            
+        jsp.getVerticalScrollBar().setUnitIncrement(10);//Incremento de la barra de scroll            
         //jsp.setHorizontalScrollBar(null);
         setContentPane(jsp);//Establece el contenido del panel.
     }
@@ -56,7 +56,7 @@ public class PanelDeTablas extends PanelBasico {
      * @return
      */
     public static PanelDeTablas getInstance() {
-        PanelDeTablas pan = new PanelDeTablas();
+        PanelDeTablas pan = new PanelDeTablas();      
         pan.barraDeHerramientasDelPanel = BarraDeHerramientasPanelDeTablas.getInstance("Barra", pan);
         pan.gestor = GestorDeTablas.getInstance(pan);
         pan.gestor.pasarTablas();         

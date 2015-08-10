@@ -58,7 +58,11 @@ public class DobleArray <C,V>{
         comprobarLongitud(this);
         this.length++;
     }
-    
+    /**
+     * Borra el elemento del indice que se le pase
+     * @param index 
+     * @throws  IndexOutOfBoundsException 
+     */
     public void remove(int index){
         this.clave.remove(index);
         this.valor.remove(index);
@@ -66,11 +70,27 @@ public class DobleArray <C,V>{
         this.length--;
            
     }
-    
+    /**
+     * Borra todos los elementos
+     */
+    public void removeAll(){
+        this.clave.clear();
+        this.valor.clear();
+        comprobarLongitud(this);
+    }
+    /**
+     * Obtiene el objeto del indice del array de claves
+     * @param index
+     * @return 
+     */
     public C getKey(int index){
         return this.clave.get(index);
     }
-    
+    /**
+     * Obtiene el objeto del indice del array de valores
+     * @param index
+     * @return 
+     */
     public V getValue(int index){
         return this.valor.get(index);
     }

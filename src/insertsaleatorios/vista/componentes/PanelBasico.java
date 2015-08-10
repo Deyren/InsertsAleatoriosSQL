@@ -4,8 +4,6 @@
 package insertsaleatorios.vista.componentes;
 
 import insertsaleatorios.Datos;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;

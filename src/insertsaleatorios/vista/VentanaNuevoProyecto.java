@@ -4,6 +4,8 @@
 package insertsaleatorios.vista;
 
 import insertsaleatorios.Datos;
+import insertsaleatorios.controlador.GestorVentanaPrincipal;
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -18,6 +20,20 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class VentanaNuevoProyecto extends javax.swing.JFrame {
 
+   
+    /**
+     * Creates new form VentanaNuevoProyecto
+     * @param padre 
+     */
+    public VentanaNuevoProyecto() {
+        initComponents();
+        setLocationRelativeTo(GestorVentanaPrincipal.getVentanaPrincipal());
+        setTitle("Nuevo proyecto...");
+        textoNombreProyecto.requestFocus();
+        textoRuta.setEditable(false);
+        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
+      
+         }
     /**
      * Creates new form VentanaNuevoProyecto
      * @param posicion Posicion en la que aparecerá
@@ -31,7 +47,21 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
       
          }
-    
+     
+    /**
+     * Creates new form VentanaNuevoProyecto
+     * @param x
+     * @param y 
+     */
+    public VentanaNuevoProyecto(int x,int y) {
+        initComponents();
+        setTitle("Nuevo proyecto...");
+        textoNombreProyecto.requestFocus();
+        setLocation(x,y);
+        textoRuta.setEditable(false);
+        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
+      
+         }
     private void nuevoProyecto(){
           // Si el nombre esta vacio
         if (textoNombreProyecto.getText().trim().isEmpty()) {
@@ -82,7 +112,7 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
 
         setIconImages(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
         jLabel1.setText("Nombre:");
@@ -144,15 +174,15 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
                                 .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonCancelar)
-                                .addGap(0, 57, Short.MAX_VALUE))
+                                .addGap(0, 59, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(28, 28, 28)
-                                .addComponent(textoRuta))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textoNombreProyecto)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textoRuta)
+                                    .addComponent(textoNombreProyecto))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonSeleccionarCarpeta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelErrores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -202,6 +232,7 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
     private void botonSeleccionarCarpetaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSeleccionarCarpetaMouseClicked
         // TODO add your handling code here:
         JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Selecciona la carpeta donde guardar el proyecto.");
         jfc.setCurrentDirectory(new File(Datos.CARPETA_DEL_PROYECTO));
         jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         FileFilter ff=new FileNameExtensionFilter("Archivo de proyecto", Datos.EXTENSION_DE_ARCHIVO_DEL_PROYECTO.substring(1));
