@@ -6,6 +6,7 @@ package insertsaleatorios.controlador;
 import insertsaleatorios.vista.VentanaPrincipal;
 import insertsaleatorios.vista.componentes.PanelBasico;
 import java.awt.BorderLayout;
+import java.awt.Point;
 
 
 /**
@@ -26,6 +27,12 @@ public class GestorVentanaPrincipal {
      */
     public static VentanaPrincipal getVentanaPrincipal(){
         return ventanaPrincipal;
+    }
+    public static Point getPosicionDeVentana(){
+        if(ventanaPrincipal==null){
+            throw new Error("La ventana principal es null");
+        }
+        return ventanaPrincipal.getLocation();
     }
     /**
      * Hace que esta clase obtenga la referencia a la ventana principal.<br>
@@ -67,6 +74,6 @@ public class GestorVentanaPrincipal {
         ventanaPrincipal.getPanelFondo().add(panel);    
        ventanaPrincipal.add(panel.getBarraDeHerramientasDelPanel(),BorderLayout.NORTH);  
         ventanaPrincipal.setContentPane(ventanaPrincipal.getPanelFondo());
-       //ventanaPrincipal.add(panel);
+  
     }
 }

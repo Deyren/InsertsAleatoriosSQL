@@ -11,7 +11,6 @@ import insertsaleatorios.vista.componentes.RMenuItem;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout; 
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -33,21 +32,21 @@ import javax.swing.border.EmptyBorder;
 /**
  * Ventana que contiene el metodo Main. <br>
  * Tambien contiene la barra de menú. <br>
- * 
- *___________________ COSAS PARA CAMBIAR_________________________
- * - Al guardar el archivo se puede simplemente serializar el array de Datos
- *      en vez de crear y leer el XML, que da mucho mas trabajo.
- * 
- * - La ventana que representa una tabla no hace falta que tenga las
- *      vistas de las columnas.
- * 
- *  - El boton de las barras de herramientas para crear tablas debe ser tipo switch, 
- *      se clickea y se queda presionado hasta que se haga click en el panel de fondo, que
- *      será cuando se agrege la nueva tabla en la posicion del ratón. 
- * 
- *  - El nombre de cada panel se establece en el propio panel en lugar de mostrar
- *      el JOptionPane.
- *      Haciendo doble click en el texto se podrá modificar el nombre. Como en StarUML.
+ 
+___________________ COSAS PARA CAMBIAR_________________________
+ - Al guardar el archivo se puede simplemente serializar el array de Datos
+      en vez de crear posY leer el XML, que da mucho mas trabajo.
+ 
+ - La ventana que representa una tabla no hace falta que tenga las
+      vistas de las columnas.
+ 
+  - El boton de las barras de herramientas para crear tablas debe ser tipo switch, 
+      se clickea posY se queda presionado hasta que se haga click en el panel de fondo, que
+      será cuando se agrege la nueva tabla en la posicion del ratón. 
+ 
+  - El nombre de cada panel se establece en el propio panel en lugar de mostrar
+      el JOptionPane.
+      Haciendo doble click en el texto se podrá modificar el nombre. Como en StarUML.
  *      
  *
  * @author Ruben
@@ -122,7 +121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          try {
              //Establece el estilo que tenga el sistema operativo
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIManager.put("TextField.disabledForeground",Color.RED);
+            UIManager.put("TextField.disabledForeground",Color.RED);// No hace nada :(
         
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(VentanaTabla.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,7 +136,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panelFondo.setBorder(new EmptyBorder(0, 0, 0, 0));
         panelFondo.setBackground(Datos.COLOR_DE_FONDO_DE_PANELES);
         BorderLayout bl = new BorderLayout();
-        setLayout(new BorderLayout());
+        setLayout(null);
         panelFondo.setLayout(bl);
         panelFondo.setVisible(true);
         setContentPane(panelFondo);
@@ -149,12 +148,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     /**
      * Agrega los elementos a la barra de menú. <br>
-     * Añade su evento de ratón a cada menu y ejecuta la accion de cada caso. <br>
+ Añade su evento de ratón a cada menu posY ejecuta la accion de cada caso. <br>
      * Los elementos dependen de los enum de la clase Datos. <br>
      */
     private void iniciarBarraDeMenu() {
         if (idioma == Datos.Idiomas.ESPAÑOL) {
             int i = 0;
+           
             //Recorre el static enum BarraDeMenuEnEspañol de la clase Datos.
             for (Datos.BarraDeMenuEnEspañol bm : Datos.BarraDeMenuEnEspañol.values()) {
                 menus[i] = new JMenu(bm.name());//agrega un menu al array de menus con cada nombre del enum
@@ -164,37 +164,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         if (op == Datos.MenuDeArchivoEnEspañol.Separador) {//Si es separador.
                             menus[i].add(new JSeparator());//Agrega un separador al menu
                         } else {
-                            RMenuItem ji = new RMenuItem(op.name());//crea items con los nombres del enum
-                            ji.setName(op.name());//Pone el nombre para obtenerlo en el evento
-
+                            RMenuItem unMenuItem = new RMenuItem(op.name());//crea items con los nombres del enum
+                            unMenuItem.setName(op.name());//Pone el nombre para obtenerlo en el evento
                             //Agrega evento de raton a cada item del menu
-                            ji.addMouseListener(new MouseAdapter() {
+                            unMenuItem.addMouseListener(new MouseAdapter() {
+                                
                                 @Override
                                 public void mousePressed(MouseEvent e) {
-                                    JMenuItem jit = (JMenuItem) e.getSource();//Cast a menuItem
-                                    // System.out.println(jit.getName() + ":      Ventana principal linea 117 mas o menos");
+                                    JMenuItem unMenuItemInterno = (JMenuItem) e.getSource();//Cast a menuItem
+                                    // System.out.println(unMenuItemInterno.getName() + ":      Ventana principal linea 117 mas o menos");
 
                                     //BOTON SALIR DE LA BARRA DE MENU PULSADO
-                                    if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.Salir.name())) {
+                                    if (unMenuItemInterno.getName().equals(Datos.MenuDeArchivoEnEspañol.Salir.name())) {
                                         System.exit(0);
                                     }
 
                                     //BOTON NUEVO DE LA BARRA DE MENU PULSADO 
-                                    if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.Nuevo.name())) {
+                                    if (unMenuItemInterno.getName().equals(Datos.MenuDeArchivoEnEspañol.Nuevo.name())) {
                                         //Establece el fondo a panel de tablas     
-                                        jit.setAccelerator(KeyStroke.getKeyStroke("control N"));
-
+                                        unMenuItemInterno.setAccelerator(KeyStroke.getKeyStroke("control N"));
+                                      
                                         VentanaNuevoProyecto vnp = new VentanaNuevoProyecto();
                                         vnp.setVisible(true);
 
                                     }
                                     //Boton abrir pulsado
-                                    if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.Abrir.name())) {
+                                    if (unMenuItemInterno.getName().equals(Datos.MenuDeArchivoEnEspañol.Abrir.name())) {
                                         JOptionPane.showMessageDialog(null, "N0x4A\nNo implemented.", "Error......", JOptionPane.ERROR_MESSAGE);
 
                                     }
                                     //Boton guardar pulsado
-                                    if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.Guardar.name())) {
+                                    if (unMenuItemInterno.getName().equals(Datos.MenuDeArchivoEnEspañol.Guardar.name())) {
                                         //Si hay alguna tabla creada, lo guarda.
                                         if (!Datos.tablas.isEmpty()) {
                                             GestorDeArchivosDelProyecto can = new GestorDeArchivosDelProyecto();
@@ -205,56 +205,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         }
                                     }
                                     //Boton probar pulsado.
-                                    if (jit.getName().equals(Datos.MenuDeArchivoEnEspañol.probarVistaColumnas.name())) {
-                                        //panelParaVarios=null;
-                                        // PanelDeColumnas paco = new PanelDeColumnas();           
-                                        //  setPanelPrincipal(paco);
-                                    }
-                                }
-
-                            });
-                            menus[i].add(ji);//Añade el menuItem a la barra de menu.
-                        }
-
-                    }
-                }
+                                    if (unMenuItemInterno.getName().equals(Datos.MenuDeArchivoEnEspañol.probarVistaColumnas.name())) {
+                                    
+                                }}});
+                            menus[i].add(unMenuItem);//Añade el menuItem a la barra de menu.
+                }}}
                 barraDeMenu.add(menus[i]);
-                i++;
+                i++; // i se usa para el array de JMenu
             }
-
         } else if (idioma == Datos.Idiomas.INGLES) {
             throw new Error("Ingles aun no implementado...");
         }
+        
+      
 
-        //Bucle para debug
+//______Bucle para debug____________________________________________________________________
         java.util.Timer t = new Timer();
         t.schedule(new TimerTask() {
-
-            int deb = 0;
-
             @Override
             public void run() {
-                Datos.tablas.stream().forEach((tabla) -> {
-
-                    tabla.getColumnas().stream().forEach((coo) -> {
-                        //System.out.println(coo.getNumeroDeColumna());
-                    });
-
-//                    System.out.print (tabla.getNombre()+" ");
-//                    tabla.getColumnas().stream().forEach((col) -> {
-//                        if(col!=null){
-//                           //    System.out.println(col.toString());
-//                        }
-//                     
-//                    });
-                    deb++;
-                    if (deb == 10) {
-                        deb = 0;
-                        System.out.println("");
-                    }
-                });
-            }
-        }, 100, 1000);
+                panelFondo.repaint();
+                Datos.tablas.stream().forEach((tabla) -> { //Recorre las tablas
+                    tabla.getColumnas().stream().forEach((coo) -> { //Recorre las columans de cada tabla
+                        //
+                    });});}}
+       , 100, 60);
     }
 
     /**

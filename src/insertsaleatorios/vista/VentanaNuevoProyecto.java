@@ -23,7 +23,7 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
    
     /**
      * Creates new form VentanaNuevoProyecto
-     * @param padre 
+     * 
      */
     public VentanaNuevoProyecto() {
         initComponents();
@@ -31,8 +31,8 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         setTitle("Nuevo proyecto...");
         textoNombreProyecto.requestFocus();
         textoRuta.setEditable(false);
-        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
-      
+        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO+"\\"+textoNombreProyecto.getText());
+    
          }
     /**
      * Creates new form VentanaNuevoProyecto
@@ -44,8 +44,8 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         textoNombreProyecto.requestFocus();
         setLocation(posicion);
         textoRuta.setEditable(false);
-        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
-      
+      textoRuta.setText(Datos.CARPETA_DEL_PROYECTO+"\\"+textoNombreProyecto.getText());
+    
          }
      
     /**
@@ -59,7 +59,8 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         textoNombreProyecto.requestFocus();
         setLocation(x,y);
         textoRuta.setEditable(false);
-        textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
+    textoRuta.setText(Datos.CARPETA_DEL_PROYECTO+"\\"+textoNombreProyecto.getText());
+    
       
          }
     private void nuevoProyecto(){
@@ -69,24 +70,12 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         } else if (textoNombreProyecto.getText().contains(".")) {
             labelErrores.setText("El texto no puede contener puntos.");
         } else {//Si el nombre esta bien escrito.
-            
             // Cambia el nombe de proyecto 
             Datos.nombreDelProyectoActual=textoNombreProyecto.getText().trim();
-            
-             //Guarda el archivo. mejor no guardar al crear nuevo proyecto.
-            //CreadorDeArchivoDeNuevoProyecto cac = new CreadorDeArchivoDeNuevoProyecto();
-//            cac.crearArchivo(Datos.tablas, new File(Datos.CARPETA_DEL_PROYECTO
-//                    + textoNombreProyecto.getText().trim()
-//                    + Datos.EXTENSION_DE_ARCHIVO_DEL_PROYECTO));
-            
-            //Borra los datos de las tablas.
-            
-            Datos.tablas.clear();
-            
+            //Borra los datos de las tablas.           
+            Datos.tablas.clear();            
             //Añade el panel de tablas a la ventana principal.
-            PanelDeTablas.getInstance();
-          //  GestorVentanaPrincipal.establecerPanelDeFondo(PanelDeTablas.getInstance());  
-            
+            PanelDeTablas.getInstance();       
             setVisible(false);
         }
     }
@@ -121,6 +110,9 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         textoNombreProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 textoNombreProyectoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textoNombreProyectoKeyReleased(evt);
             }
         });
 
@@ -241,8 +233,8 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
         if (result == JFileChooser.APPROVE_OPTION) {
             File archivo = jfc.getSelectedFile();
             Datos.CARPETA_DEL_PROYECTO = archivo.getAbsolutePath();
-            textoRuta.setText(Datos.CARPETA_DEL_PROYECTO);
-            
+           textoRuta.setText(Datos.CARPETA_DEL_PROYECTO+"\\"+textoNombreProyecto.getText());
+    
         }
     }//GEN-LAST:event_botonSeleccionarCarpetaMouseClicked
 
@@ -275,6 +267,12 @@ public class VentanaNuevoProyecto extends javax.swing.JFrame {
             nuevoProyecto();
         }
     }//GEN-LAST:event_textoRutaKeyPressed
+
+    private void textoNombreProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoNombreProyectoKeyReleased
+         // TODO add your handling code here:
+   textoRuta.setText(Datos.CARPETA_DEL_PROYECTO+"\\"+textoNombreProyecto.getText());
+        
+    }//GEN-LAST:event_textoNombreProyectoKeyReleased
 
 
 

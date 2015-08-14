@@ -29,6 +29,10 @@ public class GestorDeTablas {
 
     private final DobleArray<Tabla, VentanaTabla> tablasYVentanas;
 
+    public DobleArray<Tabla, VentanaTabla> getTablasYVentanas() {
+        return tablasYVentanas;
+    }
+
     /**
      * Metodo estatico que devuelve un objeto de esta clase Solo devuelve uno.
      * siempre es el mismo.
@@ -62,9 +66,12 @@ public class GestorDeTablas {
         posXDeCadaTabla=0;
         posYDeCadaTabla=0;
         Datos.tablas.stream().forEach((tabla) -> {
+//            VentanaTabla vt = new VentanaTabla(tabla,
+//                    new Point(posXDeCadaTabla += Datos.tamañoDeVentanaDeTabla.width,
+//                            posYDeCadaTabla += Datos.tamañoDeVentanaDeTabla.height),this.panel);
+            
             VentanaTabla vt = new VentanaTabla(tabla,
-                    new Point(posXDeCadaTabla += Datos.tamañoDeVentanaDeTabla.width,
-                            posYDeCadaTabla += Datos.tamañoDeVentanaDeTabla.height));
+                    new Point(0,0),this.panel);
             tablasYVentanas.add(tabla, vt);
         });
         actualizarVista();
@@ -78,9 +85,11 @@ public class GestorDeTablas {
      */
     public void nuevaTabla(String tablename) {
         Tabla tabla = Tabla.getTablaVacia(tablename);//Crea el objeto Tabla.
-        VentanaTabla vt = new VentanaTabla(tabla,
-                new Point(posXDeCadaTabla += Datos.tamañoDeVentanaDeTabla.width,
-                        posYDeCadaTabla += Datos.tamañoDeVentanaDeTabla.height));
+//        VentanaTabla vt = new VentanaTabla(tabla,
+//                new Point(posXDeCadaTabla += Datos.tamañoDeVentanaDeTabla.width,
+//                        posYDeCadaTabla += Datos.tamañoDeVentanaDeTabla.height),this.panel);
+           VentanaTabla vt = new VentanaTabla(tabla,
+                    new Point(0,0),this.panel);
         vt.setVisible(true);
         Datos.tablas.add(tabla);//Agrega la tabla al array estatico
         tablasYVentanas.add(tabla, vt);//Añade la tabla y la ventana de esa tabla.

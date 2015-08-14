@@ -38,7 +38,7 @@ public class Datos {
      * Carpeta por defecto del proyecto. <br>
      * Es cambiado si se cambia la ruta en la ventana de nuevo proyecto. <br>
      */
-    public static String CARPETA_DEL_PROYECTO = "C:\\Users\\pedruben\\Desktop\\";
+    public static String CARPETA_DEL_PROYECTO = "C:\\Users\\pedruben\\Desktop";
     /**
      * Se cambia al crear nuevo proyecto o al abrir alguno.
      */
