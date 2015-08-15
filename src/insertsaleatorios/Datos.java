@@ -12,7 +12,7 @@ public class Datos {
     /**
      * Color elgido para el fondo de los paneles. <br>
      */
-    public static final Color COLOR_DE_FONDO_DE_PANELES = new Color(20, 100, 170);
+    public static final Color COLOR_DE_FONDO_DE_PANELES = new Color(30, 30, 30);
     /**
      * El array de tablas que se usa en cada momento. <br>
      * Es el que se usa para guardar el archivo. <br>
@@ -91,7 +91,7 @@ public class Datos {
 
     /**
      * Devuelve un String array con el nombre
-     * de cada tabla en cada elemento del array.
+     * de cada tabla del array.
      * @return 
      */
     public static String[] nombresDeLasTablas() {

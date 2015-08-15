@@ -1,22 +1,22 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Moreno
  */
 package insertsaleatorios.vista;
 
 import insertsaleatorios.Datos;
-import insertsaleatorios.controlador.GestorVentanaPrincipal;
 import insertsaleatorios.modelo.Tabla;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseMotionListener;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.Rectangle2D;
 import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.JMenuItem;
@@ -50,7 +50,11 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
 
     private final PanelDeTablas padre;
 
-   private int posX, posY;
+    /**
+     * Guardará la posicion del raton en esta ventana al hacer click
+     *
+     */
+    private int posX, posY;
 
     /**
      * Creates new form VistaDeTabla.<br>
@@ -65,21 +69,23 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
      */
     public VentanaTabla(Tabla suTabla, Point posicion, PanelDeTablas padre) {
         initComponents();
-        this.padre = padre; 
+        this.padre = padre;
         jtf = new JTextField();
         initComponents2();
         //textoNombreDeLaTabla.setFont(Font.decode("UTF-8"));
-        // textoNombreDeLaTabla.setFont(new java.awt.Font("Amstrad CPC464", 1, 18)); // NOI18N
+
+       labelPrueba.setFont(new java.awt.Font("Amstrad CPC464", 1, 24)); // NOI18N
         setMinimumSize(Datos.tamañoDeVentanaDeTabla);
-        textoNombreDeLaTabla.setText(suTabla.getNombre());
+        
+        labelPrueba.setText(suTabla.getNombre());
         textoInfo.setText("Columnas: " + suTabla.getColumnas().size());
         actualizarTamaño();
         setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.MOVE_CURSOR));
         setLocation(posicion);
         this.suTabla = suTabla;
         setBackground(new Color(20, 40, 240));//Color del fondo del titulo de la tabla
-        textoNombreDeLaTabla.setEnabled(false);
       
+
     }
 
     private void actualizacionDePosiciones() {
@@ -87,10 +93,24 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
         t.schedule(new TimerTask() {
             @Override
             public void run() {
-                // System.out.println(ratonPulsado);
-              
+                // System.out.println(ratonPulsado);              
             }
         }, 100, 60);
+    }
+
+    /**
+     * Devuelve el tamaño del string en pixeles como objeto rectangulo
+     *
+     * @param fuente. Se le pasa el objeto Font del componente
+     * @param string. Se le pasa el String a medir.
+     * @return
+     */
+    private  Rectangle2D tamañoDeUnString(Font fuente, String string) {
+        FontRenderContext frc = new FontRenderContext(null,
+                RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT,
+                RenderingHints.VALUE_FRACTIONALMETRICS_DEFAULT);
+        Rectangle2D rect = (fuente.getStringBounds(string, frc));
+        return rect;
     }
 
     /**
@@ -98,13 +118,15 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
      * tabla.
      */
     private void actualizarTamaño() {
-        int letras = 10;//Cantidad minima de espacio que ocupará
-        if (textoNombreDeLaTabla.getText().length() > letras) {
-            letras = textoNombreDeLaTabla.getText().length();
+        Rectangle2D ii = tamañoDeUnString(labelPrueba.getFont(), " " + labelPrueba.getText() + " ");
+        Rectangle2D oo =tamañoDeUnString(textoInfo.getFont(), " " + textoInfo.getText() + " ");
+        if(ii.getWidth() < oo.getWidth()){
+            labelPrueba.setSize((int)oo.getWidth(),(int) ii.getHeight());
+             setSize((int)oo.getWidth(), (int) (ii.getHeight()+(oo.getHeight()*2)));
+        }else{
+             labelPrueba.setSize((int)ii.getWidth(), (int)ii.getHeight());
+             setSize((int)ii.getWidth(),  (int)( ii.getHeight()+(oo.getHeight()*2)));
         }
-        Dimension dimm = new Dimension(letras * 10, Datos.tamañoDeVentanaDeTabla.height);
-        textoNombreDeLaTabla.setSize(dimm.width, dimm.height / 2);
-        setSize(dimm);
         updateUI();
     }
 
@@ -141,45 +163,34 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        textoNombreDeLaTabla = new javax.swing.JTextField();
         textoInfo = new javax.swing.JLabel();
+        labelPrueba = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setMinimumSize(new java.awt.Dimension(192, 54));
         setName(""); // NOI18N
-
-        textoNombreDeLaTabla.setFont(new java.awt.Font("Liberation Sans Narrow", 1, 18)); // NOI18N
-        textoNombreDeLaTabla.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        textoNombreDeLaTabla.setAutoscrolls(false);
-        textoNombreDeLaTabla.setSelectionColor(new java.awt.Color(0, 102, 255));
-        textoNombreDeLaTabla.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textoNombreDeLaTablaMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                textoNombreDeLaTablaMousePressed(evt);
-            }
-        });
-        textoNombreDeLaTabla.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                textoNombreDeLaTablaKeyPressed(evt);
-            }
-        });
 
         textoInfo.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
         textoInfo.setText("Columnas:");
+
+        labelPrueba.setFont(new java.awt.Font("Andalus", 0, 14)); // NOI18N
+        labelPrueba.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelPrueba.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textoNombreDeLaTabla, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-            .addComponent(textoInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(textoInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+            .addComponent(labelPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(textoNombreDeLaTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(textoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(textoInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPrueba, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addGap(61, 61, 61))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -190,122 +201,44 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initComponents2(){
-           addMouseListener(this);
-           addMouseMotionListener(this);
+    private void initComponents2() {
+        addMouseListener(this);
+        addMouseMotionListener(this);
     }
-        /**
-     *
-     * @param evt
-     */
-    private void textoNombreDeLaTablaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textoNombreDeLaTablaKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { //Si se pulsa ENTER...
-            if (textoNombreDeLaTabla.isEnabled()) {
-                textoNombreDeLaTabla.setEnabled(false);
-                suTabla.setNombre(textoNombreDeLaTabla.getText().trim());
-            }
-            actualizarTamaño();
-        }
-
-
-    }//GEN-LAST:event_textoNombreDeLaTablaKeyPressed
-
-    private void textoNombreDeLaTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoNombreDeLaTablaMouseClicked
-        // TODO add your handling code here:
-
-        if (evt.getButton() == MouseEvent.BUTTON3) {//Raton derecho pulsado sobre la vista de la tabla
-            if (!textoNombreDeLaTabla.isEnabled()) {// Solo muestra el popup cuando no se esta editando el texto.
-                mostrarPopup(evt);
-            }
-
-        } else if (evt.getButton() == MouseEvent.BUTTON1
-                || evt.getButton() == MouseEvent.BUTTON2) {
-            if (evt.getClickCount() == 2) { // Boton 1 o 2 pulsado dos veces
-
-                // INTENTO DE CREAR UN TEXT PARA CUANDO SE CAMBIA EL NOMBRE DE LA TABLA
-//                jtf.setText(textoNombreDeLaTabla.getText());
-//                jtf.setBounds(textoNombreDeLaTabla.getBounds());
-//                jtf.setFont(textoNombreDeLaTabla.getFont());
-//                jtf.setForeground(Color.BLACK);
-//                jtf.requestFocus();
-//                jtf.setSelectionStart(0);
-//
-//                textoNombreDeLaTabla.setText("");
-//                jtf.setVisible(true);
-//
-//                jtf.addKeyListener(new KeyAdapter() {
-//
-//                    @Override
-//                    public void keyPressed(KeyEvent e) {
-//                        System.out.println(jtf.toString());
-//                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//                            textoNombreDeLaTabla.setText(jtf.getText());
-//                            suTabla.setNombre(jtf.getText());
-//                            jtf.setVisible(false);
-//                            
-//                        }
-//
-//                    }
-//
-//                });
-//
-//                add(jtf);
-                textoNombreDeLaTabla.setEnabled(true);
-                textoNombreDeLaTabla.setSelectionStart(0);//Hace que aparezca todo el texto seleccionado.
-            }
-
-            if (elPopup != null) {
-                elPopup.setVisible(false);
-                elPopup = null;
-            }
-
-        }
-
-
-    }//GEN-LAST:event_textoNombreDeLaTablaMouseClicked
-
-    private void textoNombreDeLaTablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textoNombreDeLaTablaMousePressed
-        // TODO add your handling code here:
-     
-    }//GEN-LAST:event_textoNombreDeLaTablaMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelPrueba;
     private javax.swing.JLabel textoInfo;
-    private javax.swing.JTextField textoNombreDeLaTabla;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void mouseDragged(MouseEvent e) {
-                int dx = e.getX() -getLocation().x;
-                int dy = e.getY() - posY/2;               
-                System.out.println(dx+":"+dy);
-                System.out.println("Raton: "+e.getPoint());
-                setLocation(getX()+dx,getY()+ dy);       
-                setLocation(getX(),getY());  
-                //posX = e.getX();
-                //posY = e.getY();
+        setLocation(getX() + e.getX() - posX, getY() + e.getY() - posY);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-      
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-         padre.setComponentZOrder(this, 0);
+        padre.setComponentZOrder(this, 0);
+        posX = e.getX();
+        posY = e.getY();
     }
 
     @Override
@@ -315,11 +248,11 @@ public final class VentanaTabla extends javax.swing.JPanel implements MouseListe
 
     @Override
     public void mouseEntered(MouseEvent e) {
-     e.consume();
+        e.consume();
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-     e.consume();
+        e.consume();
     }
 }
